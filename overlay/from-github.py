@@ -54,14 +54,11 @@ for attach in attachments:
             if f.filename.endswith("apk"):
                 generated = z.extract(f, path = "tmp-" + str(fileId))
                 apkFiles += [generated]
-    else:
-        #Assume text file
-        if "prop" in attach:
-            fName = "tmp-" + str(fileId)
-            f = open(fName, "wb")
+    elif "prop" in attach:
+        fName = "tmp-" + str(fileId)
+        with open(fName, "wb") as f:
             f.write(data)
-            f.close()
-            propFiles += [ fName ]
+        propFiles += [ fName ]
 
 print("Got apks", apkFiles)
 print("Got props", propFiles)
